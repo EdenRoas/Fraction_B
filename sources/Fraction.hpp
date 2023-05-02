@@ -19,7 +19,7 @@ namespace ariel
     int denominator;
     float number;
     float mul(const Fraction &fra1, const Fraction &fra2);
-    
+    //Fraction floatToFraction(float value);
         
     public:
         // constructor and destructor
@@ -27,7 +27,11 @@ namespace ariel
         Fraction(int num ,int den);
         Fraction(float number);
         void reduce();
-        static Fraction floatToFraction(float value);
+        //Fraction floatToFraction(float value);
+        // Getters and setters 
+        int getNumerator() const;
+        int getDenominator() const;
+        
 
         // Addition
         Fraction operator+(const Fraction &fra1) const;
@@ -51,45 +55,41 @@ namespace ariel
         
 
          // comparison operators (<, >, <=, >=, ==, !=)
-        friend bool operator>(const Fraction &fra1, const Fraction &fra2);
+        bool operator>(const Fraction &fra1) const;
         friend bool operator>(const Fraction &fra1, float scalar);
         friend bool operator>(float scalar, const Fraction &fra1);
 
-        friend bool operator<(const Fraction &fra1, const Fraction &fra2);
+        bool operator<(const Fraction &fra1) const;
         friend bool operator<(const Fraction &fra1, float scalar);
         friend bool operator<(float scalar, const Fraction &fra1);
 
-        friend bool operator==(const Fraction &fra1, const Fraction &fra2);
+        bool operator==(const Fraction &fra1) const;
         friend bool operator==(const Fraction &fra1, float scalar);
         friend bool operator==(float scalar, const Fraction &fra1);
 
         //friend bool operator!=(const Fraction &fra1, const Fraction &fra2);
-        friend bool operator>=(const Fraction &fra1, const Fraction &fra2);
+        bool operator>=(const Fraction &fra1) const;
         friend bool operator>=(const Fraction &fra1, float scalar);
         friend bool operator>=(float scalar, const Fraction &fra1);
 
-        friend bool operator<=(const Fraction &fra1, const Fraction &fra2);
+        bool operator<=(const Fraction &fra1) const;
         friend bool operator<=(const Fraction &fra1, float scalar);
         friend bool operator<=(float scalar, const Fraction &fra1);
         
         // Increment and decrement operators
         //postfix y = x++ ->return the original num and then increment
-        friend Fraction operator++(const Fraction &fra1); 
-        friend Fraction operator--(const Fraction &fra1);
+        Fraction operator++(); 
+        Fraction operator--();
         //prefix ++(++x) -> first make increment and then return ths num
-        friend Fraction &operator++(const Fraction &fra1, int prefix); 
-        friend Fraction &operator--(const Fraction &fra1, int prefix); 
+        Fraction &operator++(int prefix); 
+        Fraction &operator--(int prefix); 
         
         
         // Input and output
         friend ostream &operator<<(ostream &ostream, const Fraction &fra1);
         friend istream &operator>>(istream &ostream, Fraction &fra1);
 
-          // Getters and setters 
-            int getNumerator() const;
-            int getDenominator() const;
-            void setNumerator(int numerator);
-            void setDenominator(int denominator);
+            
     };
 
 };
