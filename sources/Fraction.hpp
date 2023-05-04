@@ -6,6 +6,8 @@
 #include <sstream>
 #include <cmath>
 #include <numeric>
+#include <limits>
+#include <iomanip>
 
 
 using namespace std;
@@ -27,6 +29,7 @@ namespace ariel
         Fraction(int num ,int den);
         Fraction(float number);
         void reduce();
+        void simplify();
         //Fraction floatToFraction(float value);
         // Getters and setters 
         int getNumerator() const;
@@ -78,11 +81,11 @@ namespace ariel
         
         // Increment and decrement operators
         //postfix y = x++ ->return the original num and then increment
-        Fraction operator++(); 
-        Fraction operator--();
+        Fraction &operator++(); 
+        Fraction &operator--();
         //prefix ++(++x) -> first make increment and then return ths num
-        Fraction &operator++(int prefix); 
-        Fraction &operator--(int prefix); 
+        Fraction operator++(int prefix); 
+        Fraction operator--(int prefix); 
         
         
         // Input and output
