@@ -20,20 +20,19 @@ namespace ariel
     int numerator;
     int denominator;
     float number;
-    float mul(const Fraction &fra1, const Fraction &fra2);
-    //Fraction floatToFraction(float value);
+   
         
     public:
-        // constructor and destructor
-        Fraction();
+        // constructor
+        Fraction(); // default
         Fraction(int num ,int den);
         Fraction(float number);
-        void reduce();
-        void simplify();
+        void reduce(); 
+        //void simplify();
         //Fraction floatToFraction(float value);
         // Getters and setters 
-        int getNumerator() const;
-        int getDenominator() const;
+        int getNumerator() const;//return the num
+        int getDenominator() const;//return the den
         
 
         // Addition

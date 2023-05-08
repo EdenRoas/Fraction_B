@@ -2,28 +2,20 @@
 using namespace std;
 using namespace ariel;
 
-// constructor and destructor
-Fraction::Fraction()
+
+Fraction::Fraction() //defult constr
 {
     this->denominator = 1;
     this->numerator = 1;
 }
-int gcd_F(int a, int b)
+
+
+Fraction::Fraction (float value) // -> anither constructor ->casting to fraction
 {
-    if (b == 0)
-    {
-        return a;
-    }
-    return gcd_F(b, a % b);
+    this->numerator = static_cast<int>(value*1000); 
+    this-> denominator = 1000;
+    reduce();
 }
-
-
-     Fraction::Fraction (float value) // -> casting to fraction
-     {
-        this->numerator = static_cast<int>(value*1000); 
-        this-> denominator = 1000;
-        reduce();
-    }
 
 Fraction::Fraction(int num, int den) : numerator(num), denominator(den)
 {
@@ -60,21 +52,31 @@ void Fraction::reduce()
     numerator /= gcd;
     denominator /= gcd;
 }
-int Fraction::getNumerator() const
+// int gcd_F(int a, int b) // help function -> return the gcd between two number
+// {
+//     if (b == 0)
+//     {
+//         return a;
+//     }
+//     return gcd_F(b, a % b);
+// }
+
+int Fraction::getNumerator() const // return the numerator
 {
     return this->numerator;
 }
-int Fraction::getDenominator() const
+int Fraction::getDenominator() const //return the denominator
 {
     return this->denominator;
 }
 
 // Addition
 
-Fraction Fraction::operator+(const Fraction &fra1) const // Multiply by crossing
+Fraction Fraction::operator+(const Fraction &fra1) const // Add two fraction
 {
     int num = this->numerator * fra1.denominator + fra1.numerator * this->denominator;
     int den = this->denominator * fra1.denominator;
+    //overflow for Add
     int max_int = numeric_limits<int>::max();
     int min_int = numeric_limits<int>::min();
     if ((this->numerator == max_int && this->denominator != max_int)
@@ -84,12 +86,12 @@ Fraction Fraction::operator+(const Fraction &fra1) const // Multiply by crossing
             }
     return Fraction(num, den);
 }
-Fraction ariel::operator+(const Fraction &fra1, float scalar)
+Fraction ariel::operator+(const Fraction &fra1, float scalar) // Add between fraction and float
 {
     return fra1 + Fraction(scalar);
 }
 
-Fraction ariel::operator+(float scalar, const Fraction &fra1)
+Fraction ariel::operator+(float scalar, const Fraction &fra1) //same but diffrent order
 {
     return Fraction(scalar) + fra1;
 }
@@ -117,7 +119,7 @@ Fraction ariel::operator-(float scalar, const Fraction &fra1)
 }
 
 // Multiplication
-Fraction Fraction::operator*(const Fraction &fra1) const // ans = fra1 * fra2
+Fraction Fraction::operator*(const Fraction &fra1) const // num * num , den * den
 {
     int num = fra1.numerator * this->numerator;
     int den = fra1.denominator * this->denominator;
@@ -142,7 +144,7 @@ Fraction ariel::operator*(float scalar, const Fraction &fra1)
     return Fraction(scalar) * fra1;
 }
 // Divide
-Fraction Fraction::operator/(const Fraction &fra1) const // ans = fra1 / fra2
+Fraction Fraction::operator/(const Fraction &fra1) const // ans = this / fra1
 {   
     if(fra1.numerator == 0){
         __throw_runtime_error("Cannot divide by zero!");
@@ -165,6 +167,8 @@ Fraction ariel::operator/(float scalar, const Fraction &fra1)
 {
     return Fraction(scalar) / fra1;
 }
+
+
 // comparison operators (<, >, <=, >=, ==, !=)
 bool Fraction::operator>(const Fraction &fra1) const
 {
@@ -237,7 +241,7 @@ bool ariel::operator<=(float scalar, const Fraction &fra1)
     return (Fraction(scalar) <= fra1);
 }
 // Increment and decrement operators
-// prefix ++(++x) -> first make increment and then return ths num
+// prefix ++(++x) -> first make increment and then return the num
  Fraction &Fraction::operator++() // ++fra1
 {   
     this->numerator += this->denominator;
